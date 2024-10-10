@@ -47,7 +47,7 @@ export default function EnhancedPropertyList() {
           throw new Error("Failed to fetch properties");
         }
       }
-      
+
       const data = await response.json();
       setProperties(data);
       setFilteredProperties(data);
@@ -64,7 +64,7 @@ export default function EnhancedPropertyList() {
   }, []);
 
   useEffect(() => {
-    const filtered = properties.filter(property => 
+    const filtered = properties.filter(property =>
       property.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (propertyType === '' || property.type === propertyType)
     );
@@ -76,7 +76,7 @@ export default function EnhancedPropertyList() {
   };
 
   if (loading) return <div>Loading properties...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <Error message={error} />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 p-8">
