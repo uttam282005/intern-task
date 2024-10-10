@@ -1,6 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "./ui/button";
-export default function Error({ message }: { message: string }) {
+export default function ErrorCom({ message }: { message: string }) {
  return (
       <div className="flex items-center justify-center h-screen">
         <Card className="w-full max-w-md">

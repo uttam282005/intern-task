@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ErrorCom from './Error';
 import { Bed, Bath, Square, Search } from 'lucide-react';
 
 interface Property {
@@ -76,7 +77,7 @@ export default function EnhancedPropertyList() {
   };
 
   if (loading) return <div>Loading properties...</div>;
-  if (error) return <Error message={error} />;
+  if (error) return <ErrorCom message={error} />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 p-8">
