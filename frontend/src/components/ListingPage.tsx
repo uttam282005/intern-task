@@ -67,8 +67,10 @@ export default function EnhancedPropertyList() {
 
   useEffect(() => {
     const filtered = properties.filter(property =>
-      property.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (propertyType === '' || property.type === propertyType)
+      (property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.location.state.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (propertyType === '' || property.type.toLowerCase() === propertyType.toLowerCase())
     );
     setFilteredProperties(filtered);
   }, [searchTerm, propertyType, properties]);
@@ -104,6 +106,7 @@ export default function EnhancedPropertyList() {
               <SelectValue placeholder="Property Type" />
             </SelectTrigger>
             <SelectContent className="bg-gray-800 border-gray-700 text-white">
+              <SelectItem value="">All Types</SelectItem>
               <SelectItem value="House">House</SelectItem>
               <SelectItem value="Apartment">Apartment</SelectItem>
               <SelectItem value="Villa">Villa</SelectItem>
