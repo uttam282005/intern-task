@@ -8,7 +8,12 @@ const userMiddleware = require("../mddileware");
 const cors = require("cors");
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: 'https://intern-task-omega.vercel.app', // your frontend URL
+  methods: ['GET', 'POST'], // add other methods as needed
+};
+
+app.use(cors(corsOptions));
 
 app.get('/', async (req, res) => {
   res.send("done");
