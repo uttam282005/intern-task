@@ -19,7 +19,7 @@ interface Property {
   bedrooms: number;
   bathrooms: number;
   area: number;
-  type: string;
+  type?: string;
   status: 'For Sale' | 'For Rent' | 'Sold';
   image: string;
 }
@@ -70,7 +70,7 @@ export default function EnhancedPropertyList() {
       (property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         property.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
         property.location.state.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (propertyType === 'all' || property.type.toLowerCase() === propertyType.toLowerCase())
+      (propertyType === 'all' || (property.type && property.type.toLowerCase() === propertyType.toLowerCase()))
     );
     setFilteredProperties(filtered);
   }, [searchTerm, propertyType, properties]);
