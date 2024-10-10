@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ErrorCom from './Error';
 import { Bed, Bath, Square, Search } from 'lucide-react';
+import { BACKEND_URL } from '@/constants/index';
 
 interface Property {
   id: string;
@@ -35,7 +36,7 @@ export default function EnhancedPropertyList() {
   const fetchProperties = async () => {
     try {
       const token = localStorage.getItem("token") || "error";
-      const response = await fetch("http://localhost:3000/real-estate", {
+      const response = await fetch(`${BACKEND_URL}/real-estate`, {
         headers: {
           "Authorization": `Bearer ${token}`,
         }
