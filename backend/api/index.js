@@ -1,20 +1,18 @@
 const express = require("express");
 const app = express();
-const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const jwtPassword = "secret";
-const { User, RealEstate } = require("./db");
-const dummyRealEstateData = require("./dummydata");
-const userMiddleware = require("./mddileware");
+const { User, RealEstate } = require("../db");
+const dummyRealEstateData = require("../dummydata");
+const userMiddleware = require("../mddileware");
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
-// app.get('/', async (req, res) => {
-//   await RealEstate.insertMany(dummyRealEstateData);
-//   res.send("done");
-// });
+app.get('/', async (req, res) => {
+  res.send("done");
+});
 
 app.post("/signup", (req, res) => {
   const username = req.body.name;
@@ -31,28 +29,28 @@ app.post("/signup", (req, res) => {
 
       // If user does not exist, create new user
       const token = jwt.sign({ username }, jwtPassword);
-      
-        const newUser = new User({
-          username,
-          password,
-          email
-        });
 
-        newUser
-          .save()
-          .then(() =>
-            res.json({
-              msg: "User created successfully!",
-              token,
-            })
-          )
-          .catch((err) =>{
-            console.log(err)
-            res.status(500).send("Something is up with the server!")
-          }
-          );
+      const newUser = new User({
+        username,
+        password,
+        email
+      });
+
+      newUser
+        .save()
+        .then(() =>
+          res.json({
+            msg: "User created successfully!",
+            token,
+          })
+        )
+        .catch((err) => {
+          console.log(err)
+          res.status(500).send("Something is up with the server!")
+        }
+        );
     })
-    .catch((err) => {console.log(err);res.status(500).send("Error querying the database!")}); // Moved here
+    .catch((err) => { console.log(err); res.status(500).send("Error querying the database!") }); // Moved here
 });
 
 app.post("/signin", (req, res) => {
@@ -68,22 +66,22 @@ app.post("/signin", (req, res) => {
 
       // Compare passwords
       const isMatch = password === user.password;
-          if (!isMatch) {
-            return res
-              .status(400)
-              .json({ msg: "Invalid password!" });
-          }
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ msg: "Invalid password!" });
+      }
 
-          // If password is correct, sign the JWT token
-          const token = jwt.sign({ email: user.email }, jwtPassword, {
-            expiresIn: "1h",
-          });
+      // If password is correct, sign the JWT token
+      const token = jwt.sign({ email: user.email }, jwtPassword, {
+        expiresIn: "1h",
+      });
 
-          res.json({
-            msg: "Login successful!",
-            token,
-          });
-        
+      res.json({
+        msg: "Login successful!",
+        token,
+      });
+
     })
     .catch((err) => res.status(500).send("Error querying the database!"));
 });
@@ -102,6 +100,4 @@ app.get("/real-estate", userMiddleware, async (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+module.exports = app;
