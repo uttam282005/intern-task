@@ -28,7 +28,7 @@ export default function EnhancedPropertyList() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [propertyType, setPropertyType] = useState('');
+  const [propertyType, setPropertyType] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -70,7 +70,7 @@ export default function EnhancedPropertyList() {
       (property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         property.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
         property.location.state.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (propertyType === '' || property.type.toLowerCase() === propertyType.toLowerCase())
+      (propertyType === 'all' || property.type.toLowerCase() === propertyType.toLowerCase())
     );
     setFilteredProperties(filtered);
   }, [searchTerm, propertyType, properties]);
@@ -106,10 +106,10 @@ export default function EnhancedPropertyList() {
               <SelectValue placeholder="Property Type" />
             </SelectTrigger>
             <SelectContent className="bg-gray-800 border-gray-700 text-white">
-              <SelectItem value="">All Types</SelectItem>
-              <SelectItem value="House">House</SelectItem>
-              <SelectItem value="Apartment">Apartment</SelectItem>
-              <SelectItem value="Villa">Villa</SelectItem>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="house">House</SelectItem>
+              <SelectItem value="apartment">Apartment</SelectItem>
+              <SelectItem value="villa">Villa</SelectItem>
             </SelectContent>
           </Select>
         </div>
