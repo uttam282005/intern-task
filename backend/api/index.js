@@ -3,14 +3,14 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const jwtPassword = "secret";
 const { User, RealEstate } = require("../db");
-const dummyRealEstateData = require("../dummydata");
 const userMiddleware = require("../mddileware");
 const cors = require("cors");
-
 app.use(express.json());
+
 const corsOptions = {
-  origin: 'https://intern-task-omega.vercel.app', // your frontend URL
-  methods: ['GET', 'POST'], // add other methods as needed
+  origin: 'https://intern-task-omega.vercel.app', // Your frontend URL
+  methods: ['GET', 'POST'], // Allowed HTTP methods
+  credentials: true, // Allow credentials (e.g., cookies, authorization headers)
 };
 
 app.use(cors(corsOptions));
