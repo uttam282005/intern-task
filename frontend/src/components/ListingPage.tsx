@@ -116,7 +116,7 @@ export default function EnhancedPropertyList() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProperties.map((property) => (
             <Card key={property.id} className="bg-gray-800 bg-opacity-50 border-gray-700 overflow-hidden">
-              <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
+              <img src={property.image[0]} alt={property.title} className="w-full h-48 object-cover" />
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-xl font-bold text-white">{property.title}</CardTitle>
