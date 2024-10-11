@@ -21,7 +21,7 @@ interface Property {
   area: number;
   type?: string;
   status: 'For Sale' | 'For Rent' | 'Sold';
-  image: string;
+  image: string[];
 }
 
 export default function EnhancedPropertyList() {
